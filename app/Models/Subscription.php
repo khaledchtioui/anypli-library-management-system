@@ -11,11 +11,11 @@ class Subscription extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class);
     }
 
     public function library()
     {
-        return $this->belongsTo(Library::class, 'library_id', 'id_library');
+        return $this->belongsTo(Library::class);
     }
 }

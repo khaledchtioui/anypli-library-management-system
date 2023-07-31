@@ -9,9 +9,13 @@ class Notification extends Model
 {
     use HasFactory;
 
+
+
+
+
     public function recipient()
     {
-        return $this->belongsTo(User::class, 'recipient_id');
+        return $this->belongsTo(User::class);
     }
 
 }

@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
 
 
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('library_id');
+
             $table->date('registration_date');
             $table->date('registration_end_date');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('library_id');
             // Add other columns as needed
 
             // Foreign key constraints for the relationships

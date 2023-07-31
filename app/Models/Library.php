@@ -9,26 +9,14 @@ class Library extends Model
 {
     use HasFactory;
 
-    public function inventory()
-    {
-        return $this->hasMany(Book::class, 'library_id', 'id_library');
-    }
-
-    public function visitors()
-    {
-        return $this->hasMany(Visitor::class, 'library_id', 'id_library');
-    }
-
-    public function notifications()
-    {
-        return $this->hasMany(Notification::class, 'library_id', 'id_library');
-    }
-
     public function librarian()
     {
-        return $this->hasOne(Librarian::class, 'library_id', 'id_library');
+        return $this->belongsTo(User::class);
     }
 
-
+    public function books()
+    {
+        return $this->hasMany(Book::class);
+    }
 
 }
