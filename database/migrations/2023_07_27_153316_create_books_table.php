@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('author');
             $table->integer('year');
             $table->boolean('availability')->default(false);
-            $table->json('type');
+            $table->string('type');
             $table->timestamps();
         });
     }
