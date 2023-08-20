@@ -2,17 +2,16 @@
 
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2> Show User</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
-            </div>
-        </div>
-    </div>
 
+
+
+
+    <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item">
+            <a href="{{ route('users.index') }}"><i class="bx bx-home-alt fs-lg me-1"></i>Users</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Show User</li>
+    </ol>
 
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -33,10 +32,12 @@
 
                 @endif
             </div>
+
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Roles:</strong>
+
 
             </div>
         </div>

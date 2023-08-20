@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Repositories\UserRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -15,21 +16,24 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
 
-
-    function __construct()
+protected $userRepository ;
+    function __construct(UserRepository $userRepository)
     {
         $this->middleware('permission:user|user-list|user-create|user-edit|user-delete', ['only' => ['index','store']]);
         $this->middleware('permission:user-create', ['only' => ['create','store']]);
         $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+        $this->userRepository = $userRepository;
+
+
     }
 
 
 
     public function index()
     {
+        $users = $this->userRepository->all();
 
-        $users = User::all();
         return view('users.index', compact('users'));
 
 
@@ -53,7 +57,8 @@ class UserController extends Controller
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
 
-        $user = User::create($input);
+        $user=$this->userRepository->create($input)  ;
+      //  $user = User::create($input);
         $user->assignRole($request->input('roles'));
 
         return redirect()->route('users.index')
@@ -69,7 +74,9 @@ class UserController extends Controller
      */
     public function show($id): View
     {
-        $user = User::find($id);
+        $user=$this->userRepository->find($id) ;
+
+       // $user = User::find($id);
         return view('users.show', compact('user'));
 
     }
@@ -97,8 +104,9 @@ class UserController extends Controller
         }else{
             $input = Arr::except($input,array('password'));
         }
+        $user=$this->userRepository->find($id);
 
-        $user = User::find($id);
+     //   $user = User::find($id);
         $user->update($input);
         DB::table('model_has_roles')->where('model_id',$id)->delete();
 
@@ -115,7 +123,7 @@ class UserController extends Controller
      */
     public function edit($id): View
     {
-        $user = User::find($id);
+        $user=$this->userRepository->find($id)  ;
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
 
@@ -141,7 +149,8 @@ class UserController extends Controller
      */
     public function destroy($id): RedirectResponse
     {
-        User::find($id)->delete();
+    $this->userRepository->delete($id)  ;
+    //    User::find($id)->delete();
         return redirect()->route('users.index')
             ->with('success','User deleted successfully');
     }

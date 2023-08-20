@@ -1,10 +1,13 @@
 @extends('layouts.admin')
 @section('title', 'Edit New Book')
 @section('content')
+    <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item">
+            <a href="{{ route('books.index') }}"><i class="bx bx-home-alt fs-lg me-1"></i>Books</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Edit Book</li>
+    </ol>
 
-
-    <h1>Edit Book</h1>
-<a href="{{ url('/books') }}">Back to Books List</a>
 
 @if($errors->any())
     <ul>
@@ -29,7 +32,7 @@
     </div>
 
     <div class="input-group input-group-dynamic">
-        <textarea class="form-control" type="text" id="description" name="description" value="{{ $book->description }}" required></textarea> <br>
+        <textarea class="form-control" type="text" id="description" name="description" required>{{ $book->description }}</textarea> <br>
     </div>
     <div class="input-group input-group-outline my-3">
         <label class="form-label" for="year">Year:</label>

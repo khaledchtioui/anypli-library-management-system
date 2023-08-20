@@ -92,7 +92,7 @@
                                             <a class="text-secondary font-weight-bold text-xs" href="{{ url('/books/' . $book->id_book) }}">View</a>
                                             @endcan
                                             @can('book-edit')
-                                            <a class="text-secondary font-weight-bold text-xs" href="{{ url('/books/' . $book->id_book . '/edit') }}">Edit</a>
+                                            <a class="text-secondary font-weight-bold text-xs" href="{{ route('books.edit',$book->id_book) }}">Edit</a>
                                                 @endcan
                                                 @can('book-delete')
                                             <form action="{{ url('/books/' . $book->id_book) }}" method="post">

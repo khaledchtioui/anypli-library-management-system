@@ -3,17 +3,12 @@
 @section('content')
 
 
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Edit Role</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('roles.index') }}"> Back</a>
-            </div>
-        </div>
-    </div>
-
+    <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item">
+            <a href="{{ route('roles.index') }}"><i class="bx bx-home-alt fs-lg me-1"></i>Roles</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Edit Role</li>
+    </ol>
 
     @if (count($errors) > 0)
         <div class="alert alert-danger">
@@ -53,5 +48,4 @@
     {!! Form::close() !!}
 
 
-    <p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>
 @endsection

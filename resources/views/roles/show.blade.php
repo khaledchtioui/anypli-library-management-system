@@ -2,17 +2,12 @@
 
 
 @section('content')
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2> Show Role</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('roles.index') }}"> Back</a>
-        </div>
-    </div>
-</div>
-
+    <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item">
+            <a href="{{ route('roles.index') }}"><i class="bx bx-home-alt fs-lg me-1"></i>Roles</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Show Role</li>
+    </ol>
 
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">

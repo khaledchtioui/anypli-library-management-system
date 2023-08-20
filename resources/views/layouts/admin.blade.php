@@ -51,18 +51,19 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link text-white " href="{{ route('dashboard') }}">
+                <a class="nav-link text-white {{ request()->routeIs('dashboard') ? 'active bg-gradient-primary' : '' }}" href="{{ route('dashboard') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
                     </div>
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
             </li>
+
             {{--     users  managment  --}}
 @can('user')
 
             <li class="nav-item">
-                <a class="nav-link text-white " href="{{ route('users.index') }}">
+                <a class="nav-link text-white {{ request()->routeIs(['users.index','users.show','users.edit']) ? 'active bg-gradient-primary' : '' }} " href="{{ route('users.index') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">account_circle</i>
                     </div>
@@ -73,7 +74,7 @@
             {{--     books  managment  --}}
              @can('book')
             <li class="nav-item">
-                <a class="nav-link text-white active bg-gradient-primary" href="{{ route('books.index') }}">
+                <a class="nav-link text-white {{ request()->routeIs(['books.index','books.show','books.edit'])? 'active bg-gradient-primary' : '' }}" href="{{ route('books.index') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">book</i>
                     </div>
@@ -84,7 +85,7 @@
 {{--     roles  managment  --}}
             @can('role')
             <li class="nav-item">
-                <a class="nav-link text-white" href="{{ route('roles.index')}} ">
+                <a class="nav-link text-white {{ request()->routeIs(['roles.index','roles.show','roles.edit']) ? 'active bg-gradient-primary' : '' }}" href="{{ route('roles.index')}} ">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-user-cog"></i>
                     </div>
@@ -93,9 +94,21 @@
             </li>
             @endcan
 
+            <li class="nav-item">
+                <a class="nav-link text-white {{ request()->routeIs(['borrowings.index','borrowings.show'])? 'active bg-gradient-primary' : '' }}" href="{{ route('borrowings.index')}} ">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-handshake"></i>
+
+                    </div>
+                    <span class="nav-link-text ms-1">Borrowing</span>
+                </a>
+            </li>
+
+
+
 {{--            profile  managment    --}}
             <li class="nav-item">
-                <a class="nav-link text-white" href="{{ route('profile.edit')}} ">
+                <a class="nav-link text-white {{ request()->routeIs('profile.edit') ? 'active bg-gradient-primary' : '' }}" href="{{ route('profile.edit')}} ">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">person</i>
                     </div>
@@ -110,13 +123,13 @@
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
         <div class="container-fluid py-1 px-3">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">&nbsp;</li>
-                </ol>
-                <h6 class="font-weight-bolder mb-0">&nbsp;</h6>
-            </nav>
+{{--            <nav aria-label="breadcrumb">--}}
+{{--                <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">--}}
+{{--                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>--}}
+{{--                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">&nbsp;</li>--}}
+{{--                </ol>--}}
+{{--                <h6 class="font-weight-bolder mb-0">&nbsp;</h6>--}}
+{{--            </nav>--}}
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                     <div class="input-group input-group-outline">

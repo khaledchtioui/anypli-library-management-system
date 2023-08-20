@@ -21,10 +21,12 @@ class BookRepository
         return Book::findOrFail($id);
     }
 
-    public function create($data)
+
+    public function create(array $attributes)
     {
-        return Book::create($data);
+        return Book::create($attributes);
     }
+
 
     public function update($id, $data)
     {

@@ -43,12 +43,11 @@ class BookController extends Controller
         return view('books.create', compact('categories'));
     }
 
-     public function store(BookRequest $request)
+    public function store(BookRequest $request)
     {
-
         $validatedData = $request->validated();
 
-        $book = new Book([
+        $bookAttributes = [
             'title' => $validatedData['title'],
             'author' => $validatedData['author'],
             'year' => $validatedData['year'],
@@ -56,20 +55,18 @@ class BookController extends Controller
             'type' => $validatedData['type'],
             'description' => $validatedData['description'],
             'category_id' => $validatedData['category_id'],
-        ]);
+        ];
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('public/books');
-            $book->image = str_replace('public/', '', $path);
-            $book->save();
+            $bookAttributes['image'] = str_replace('public/', '', $path);
         }
+      //  dd($path);
 
-        $book->save();
+       $this->booksRepository->create($bookAttributes);
 
-        return redirect('/books')->with('success', 'Book created successfully!');
-
-    }
-/*    public function store(Request $request)
+        return redirect()->route('books.index')->with('success', 'Book created successfully!');
+    }/*    public function store(Request $request)
     {
 
         $request->validate([
@@ -101,22 +98,29 @@ class BookController extends Controller
         $book->save();
         return redirect('/books')->with('success', 'Book created successfully!');
     }*/
-    public function show(Book $book)
+    public function show($id)
     {
+        $book = $this->booksRepository->getById($id);
+
         return view('books.show', compact('book'));
     }
 
-    public function edit(Book $book)
-    {
 
-     //   $book = Book::findOrFail($id);
+
+
+    public function edit($id)
+    {
+        $book = $this->booksRepository->getById($id);
+
+
         $categories = $this->categoryRepository->getAll();
         return view('books.edit', compact('book', 'categories'));
 
     }
 
-    public function update(BookRequest $request, Book $book)
+    public function update(BookRequest $request, $id)
     {
+        $book = $this->booksRepository->getById($id);
         $validatedData = $request->validated();
         $book->title = $validatedData['title'];
         $book->author = $validatedData['author'];
@@ -126,6 +130,7 @@ class BookController extends Controller
         $book->description = $validatedData['description'];
         $book->category_id = $validatedData['category_id'];
 
+        $data = $request->all();
 
 
         if ($request->hasFile('image')) {
@@ -133,21 +138,25 @@ class BookController extends Controller
             if ($book->image && Storage::exists('public/' . $book->image)) {
                 Storage::delete('public/' . $book->image);
             }
-
-            // Store the new image and update the image path in the database
             $path = $request->file('image')->store('public/books');
             $book->image = str_replace('public/', '', $path);
-        }
+            $this->booksRepository->update($id, $data);
 
-        $book->save();
-        return redirect('/books')->with('success', 'Book updated successfully!');
+        }
+         $this->booksRepository->update($id, $data);
+
+
+      //  $book->save();
+        return redirect()->route('books.index')->with('success', 'Book updated successfully!');
 
     }
 
-    public function destroy(Book $book)
+    public function destroy($id)
     {
-        $book->delete();
-        return redirect('/books')->with('success', 'Book deleted successfully!');
+        $this->booksRepository->delete($id);
+
+        return redirect()->route('books.index')
+            ->with('success', 'Book deleted successfully.');
     }
 
 
