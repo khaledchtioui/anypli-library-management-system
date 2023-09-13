@@ -122,6 +122,7 @@ class BookController extends Controller
     {
         $book = $this->booksRepository->getById($id);
         $validatedData = $request->validated();
+
         $book->title = $validatedData['title'];
         $book->author = $validatedData['author'];
         $book->year = $validatedData['year'];
@@ -130,9 +131,6 @@ class BookController extends Controller
         $book->description = $validatedData['description'];
         $book->category_id = $validatedData['category_id'];
 
-        $data = $request->all();
-
-
         if ($request->hasFile('image')) {
             // Delete the existing image if it exists
             if ($book->image && Storage::exists('public/' . $book->image)) {
@@ -140,15 +138,20 @@ class BookController extends Controller
             }
             $path = $request->file('image')->store('public/books');
             $book->image = str_replace('public/', '', $path);
-            $this->booksRepository->update($id, $data);
-
         }
-         $this->booksRepository->update($id, $data);
 
+        $this->booksRepository->update($id, [
+            'title' => $book->title,
+            'author' => $book->author,
+            'year' => $book->year,
+            'availability' => $book->availability,
+            'type' => $book->type,
+            'description' => $book->description,
+            'category_id' => $book->category_id,
+            'image' => $book->image,
+        ]);
 
-      //  $book->save();
         return redirect()->route('books.index')->with('success', 'Book updated successfully!');
-
     }
 
     public function destroy($id)
