@@ -25,6 +25,11 @@ class Book extends Model
         return $this->hasMany(Borrowing::class);
     }
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
 
     protected $fillable = [
         'title',

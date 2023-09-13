@@ -38,7 +38,6 @@ class BorrowingController extends Controller
     }
     public function store(Request $request)
     {
- //   dd($request);
         $data = $request->all();
 
 
@@ -48,11 +47,27 @@ class BorrowingController extends Controller
     }
 
 
-    public function edit(Borrowing $borrowing)
+    public function edit($id)
     {
-        // You can retrieve the necessary data for dropdowns, if needed
-        return view('borrowings.edit', compact('borrowing'));
+
+
+        $borrowing = $this->borrowingRepository->find($id);
+        $users = $this->userRepository->all();
+        $books = $this->bookRepository->getAll();
+        return view('borrowings.edit', compact('borrowing','users','books'));
+
+
     }
+
+    public function update(Request $request, $id)
+    {
+        $data = $request->all();
+
+        $this->borrowingRepository->update($id,$data);
+
+        return redirect()->route('borrowings.index')->with('success', 'Borrowings updated successfully!');
+    }
+
 
     public function destroy(Borrowing $borrowing)
     {

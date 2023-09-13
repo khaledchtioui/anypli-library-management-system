@@ -23,9 +23,9 @@ class Borrowing extends Model
 
 
 
-    public function book()
+    public function books()
     {
-        return $this->belongsTo(Book::class);
+        return $this->belongsTo(Book::class,'book_id');
     }
 
     public function visitor()

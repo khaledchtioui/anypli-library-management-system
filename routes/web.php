@@ -24,6 +24,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -57,6 +58,7 @@ Route::post('/borrowings', [BorrowingController::class, 'store'])->name('borrowi
 Route::get('/borrowing', [BorrowingController::class, 'index'])->name('borrowings.index');;
 Route::get('/borrowingedit/{borrowing}', [BorrowingController::class, 'edit'])->name('borrowings.edit');
 Route::delete('/borrowings/{borrowing}', [BorrowingController::class, 'destroy'])->name('borrowings.destroy');
+Route::put('/borrowings/{borrowing}', [BorrowingController::class, 'update'])->name('borrowings.update');
 
 Route::get('/books', [BookController::class, 'index'])->name('books.index');;
 Route::get('/books/create', [BookController::class, 'create']);
@@ -66,6 +68,7 @@ Route::get('/booksedit/{book}', [BookController::class, 'edit'])->name('books.ed
 Route::put('/books/{book}', [BookController::class, 'update']);
 Route::delete('/books/{book}', [BookController::class, 'destroy']);
 Route::get('/bookss', [VisitorController::class, 'index'])->name('bookss.index');
+Route::get('/bookss/cart', [VisitorController::class, 'cart'])->name('bookss.cart');
 Route::get('/bookss/{id}', [VisitorController::class, 'show'])->name('books.show');
 //Route::get('/booksfilter', [VisitorController::class, 'filterBooks'])->name('books.filter');
 //Route::delete('/users/{user}', [UserController::class, 'destroy']);

@@ -26,6 +26,13 @@ class VisitorController extends Controller
         $categories=$this->categoryRepository->getAll();
          return view('books.all_books', compact('books','categories'));
     }
+    public function cart()
+    {
+
+        $books=$this->booksRepository->getAll()  ;
+        $categories=$this->categoryRepository->getAll();
+         return view('books.cart', compact('books','categories'));
+    }
 
     public function show($id)
     {

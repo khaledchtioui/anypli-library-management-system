@@ -38,8 +38,8 @@
 
 <body class="home-4">
 <!--[if lt IE 8]>
-        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
 
 <!-- Add your site or application content here -->
 <!-- header-area-start -->
@@ -64,42 +64,20 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-12">
-                    <div class="my-cart">
+                    <div class="my-cart" id="my-carts">
                         <ul>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i>My Cart</a>
-                                <span>2</span>
-                                <div class="mini-cart-sub">
-                                    <div class="cart-product">
-                                        <div class="single-cart">
-                                            <div class="cart-img">
-                                                <a href="#"><img src="../assets/img/product/1.jpg" alt="book" /></a>
-                                            </div>
-                                            <div class="cart-info">
-                                                <h5><a href="#">Joust Duffle Bag</a></h5>
-                                                <p>1 x £60.00</p>
-                                            </div>
-                                            <div class="cart-icon">
-                                                <a href="#"><i class="fa fa-remove"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="single-cart">
-                                            <div class="cart-img">
-                                                <a href="#"><img src="../assets/img/product/3.jpg" alt="book" /></a>
-                                            </div>
-                                            <div class="cart-info">
-                                                <h5><a href="#">Chaz Kangeroo Hoodie</a></h5>
-                                                <p>1 x £52.00</p>
-                                            </div>
-                                            <div class="cart-icon">
-                                                <a href="#"><i class="fa fa-remove"></i></a>
-                                            </div>
-                                        </div>
+                            <li>
+                                <a href="#"><i class="fa fa-shopping-cart"></i>My Cart</a>
+                                <span id="cart-item-count">0</span>
+                                <div class="mini-cart-sub" id="mini-cart-sub">
+                                    <div class="cart-product" id="cart-products">
+                                        <!-- Cart items will be dynamically added here -->
                                     </div>
                                     <div class="cart-totals">
-                                        <h5>Total <span>£12.00</span></h5>
+                                        <h5>Total <span id="cart-total">£0.00</span></h5>
                                     </div>
                                     <div class="cart-bottom">
-                                        <a class="view-cart" href="cart.html">view cart</a>
+                                        <a class="view-cart" href="{{ route('bookss.cart') }}">View Cart</a>
                                         <a href="checkout.html">Check out</a>
                                     </div>
                                 </div>
@@ -354,59 +332,59 @@
 
                             @foreach($books as $book)
 
-                            <div class="col">
+                                <div class="col">
 
-                                <div class="product-wrapper mb-40">
-                                    <div class="product-img">
-                                        <a href="#">
-                                            @if($book->image)
-                                                <img src="{{ asset('storage/' . $book->image) }}" alt="Book Image" width="100">
-                                            @else
-                                                No Image
-                                            @endif                                        </a>
-                                        <div class="quick-view">
-                                            <a class="action-view" href="#" data-bs-target="#productModal" data-bs-toggle="modal" data-bs-whatever="{{ json_encode($book) }}"  title="Quick View" >
-                                                <i class="fa fa-search-plus"></i>
-                                            </a>
+                                    <div class="product-wrapper mb-40">
+                                        <div class="product-img">
+                                            <a href="#">
+                                                @if($book->image)
+                                                    <img src="{{ asset('storage/' . $book->image) }}" alt="Book Image" width="100">
+                                                @else
+                                                    No Image
+                                                @endif                                        </a>
+                                            <div class="quick-view">
+                                                <a class="action-view" href="#" data-bs-target="#productModal" data-bs-toggle="modal" data-bs-whatever="{{ json_encode($book) }}"  title="Quick View" >
+                                                    <i class="fa fa-search-plus"></i>
+                                                </a>
+                                            </div>
+                                            <div class="product-flag">
+                                                <ul>
+                                                    <li><span class="sale">new</span></li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                        <div class="product-flag">
-                                            <ul>
-                                                <li><span class="sale">new</span></li>
-                                            </ul>
+                                        <div class="product-details text-center">
+                                            <div class="product-rating">
+                                                <ul>
+                                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h4><a href="#">        {{ $book->title }}
+                                                </a></h4>
+                                            <div class="product-price">
+                                                <ul>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product-link">
+                                            <div class="product-button">
+                                                <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                            </div>
+                                            <div class="add-to-link">
+                                                <ul>
+                                                    <li><a href="product-details.html" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="product-details text-center">
-                                        <div class="product-rating">
-                                            <ul>
-                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <h4><a href="#">        {{ $book->title }}
-                                            </a></h4>
-                                        <div class="product-price">
-                                            <ul>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product-link">
-                                        <div class="product-button">
-                                            <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                        </div>
-                                        <div class="add-to-link">
-                                            <ul>
-                                                <li><a href="product-details.html" title="Details"><i class="fa fa-external-link"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
+
                                 </div>
 
-                            </div>
-
-                                @endforeach
+                            @endforeach
 
 
                         </div>
@@ -1292,61 +1270,127 @@
                         </div>
                     </div>
                     <div class="col-md-7 col-sm-7 col-xs-12">
-                    <div class="col-md-7 col-sm-7 col-xs-12">
-                        <div class="modal-pro-content">
-                            <h3 class="modal-title">
-                            </h3>
-                            <div class="price">
-                                <span class="modal-year">            {</span>
-                            </div>
-                              <p class="modal-description"></p>
-                              <p class="modal-author"></p>
+                        <div class="col-md-7 col-sm-7 col-xs-12">
+                            <div class="modal-pro-content">
+                                <h3 class="modal-title">
+                                </h3>
+                                <div class="price">
+                                    <span class="modal-year">            {</span>
+                                </div>
+                                <p class="modal-description"></p>
+                                <p class="modal-author"></p>
 
-                            <span><i class="modal-availability"></i>
+                                <span><i class="modal-availability"></i>
                                 </span>
+                                <form action="#">
+                                    <input type="number" value="1">
+                                    <button class="add-to-cart" data-product-id="{{ $book->id_book }}" data-product-name="{{ $book->title }}" data-product-image="{{ $book->image }}">Add to cart</button>
+                                </form>
+
+{{--                                <script>--}}
+{{--                                    const addToCartButtons = document.querySelectorAll('.add-to-cart');--}}
+
+{{--                                    addToCartButtons.forEach(button => {--}}
+{{--                                        button.addEventListener('click', addToCart);--}}
+{{--                                    });--}}
+
+{{--                                    function addToCart(event) {--}}
+{{--                                        event.preventDefault();--}}
+
+{{--                                        const productId = event.target.getAttribute('data-product-id');--}}
+{{--                                        const productName = event.target.getAttribute('data-product-name');--}}
+{{--                                        const productImage = event.target.getAttribute('data-product-image');--}}
+
+{{--                                        let cart = JSON.parse(sessionStorage.getItem('cart')) || {};--}}
+
+{{--                                        if (!cart[productId]) {--}}
+{{--                                            cart[productId] = {--}}
+{{--                                                id:productId,--}}
+{{--                                                name: productName,--}}
+{{--                                                image: productImage,--}}
+{{--                                                quantity: 1--}}
+{{--                                            };--}}
+{{--                                        } else {--}}
+{{--                                            cart[productId].quantity++;--}}
+{{--                                        }--}}
+
+{{--                                        sessionStorage.setItem('cart', JSON.stringify(cart));--}}
+
+{{--                                        updateCartItemCount();--}}
+{{--                                    }--}}
+
+{{--                                    function updateCartItemCount() {--}}
+{{--                                        // Implement this function to update cart item count in the UI--}}
+{{--                                    }--}}
+{{--                                </script>--}}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Modal end -->
+    <!-- Modal end -->
 
 
-<!-- all js here -->
-<!-- jquery latest version -->
-<script src="../assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- all js here -->
+    <!-- jquery latest version -->
+    <script src="../assets/js/vendor/jquery-1.12.4.min.js"></script>
 
 
-<!-- bootstrap js -->
-<script src="../assets/js/bootstrap.min.js"></script>
-<!-- owl.carousel js -->
-<script src="../assets/js/owl.carousel.min.js"></script>
-<!-- meanmenu js -->
-<script src="../assets/js/jquery.meanmenu.js"></script>
-<!-- wow js -->
-<script src="../assets/js/wow.min.js"></script>
-<!-- jquery.parallax-1.1.3.js -->
-<script src="../assets/js/jquery.parallax-1.1.3.js"></script>
-<!-- jquery.countdown.min.js -->
-<script src="../assets/js/jquery.countdown.min.js"></script>
-<!-- jquery.flexslider.js -->
-<script src="../assets/js/jquery.flexslider.js"></script>
-<!-- chosen.jquery.min.js -->
-<script src="../assets/js/chosen.jquery.min.js"></script>
-<!-- jquery.counterup.min.js -->
-<script src="../assets/js/jquery.counterup.min.js"></script>
-<!-- waypoints.min.js -->
-<script src="../assets/js/waypoints.min.js"></script>
-<!-- plugins js -->
-<script src="../assets/js/plugins.js"></script>
-<!-- main js -->
-<script src="../assets/js/main.js"></script>
+    <!-- bootstrap js -->
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <!-- owl.carousel js -->
+    <script src="../assets/js/owl.carousel.min.js"></script>
+    <!-- meanmenu js -->
+    <script src="../assets/js/jquery.meanmenu.js"></script>
+    <!-- wow js -->
+    <script src="../assets/js/wow.min.js"></script>
+    <!-- jquery.parallax-1.1.3.js -->
+    <script src="../assets/js/jquery.parallax-1.1.3.js"></script>
+    <!-- jquery.countdown.min.js -->
+    <script src="../assets/js/jquery.countdown.min.js"></script>
+    <!-- jquery.flexslider.js -->
+    <script src="../assets/js/jquery.flexslider.js"></script>
+    <!-- chosen.jquery.min.js -->
+    <script src="../assets/js/chosen.jquery.min.js"></script>
+    <!-- jquery.counterup.min.js -->
+    <script src="../assets/js/jquery.counterup.min.js"></script>
+    <!-- waypoints.min.js -->
+    <script src="../assets/js/waypoints.min.js"></script>
+    <!-- plugins js -->
+    <script src="../assets/js/plugins.js"></script>
+    <!-- main js -->
+    <script src="../assets/js/main.js"></script>
 
 
 
-    <script> const productModal = document.getElementById('productModal')
+    <script>
+        const productModal = document.getElementById('productModal')
+
+        function addToCart(product) {
+            const productId = product.id_book;
+            const productName = product.title;
+            const productImage = product.image;
+
+            let cart = JSON.parse(sessionStorage.getItem('cart')) || {};
+
+            if (!cart[productId]) {
+                cart[productId] = {
+                    name: productName,
+                    image: productImage,
+                    status: productImage,
+                    quantity: 1
+                };
+            } else {
+                cart[productId].quantity=1;
+            }
+
+            sessionStorage.setItem('cart', JSON.stringify(cart));
+
+        }
+
+
         if (productModal) {
             productModal.addEventListener('show.bs.modal', event => {
                 // Button that triggered the modal
@@ -1363,6 +1407,14 @@
                 const modalDescription = productModal.querySelector('.modal-description')
                 const modalAuthor = productModal.querySelector('.modal-author')
                 const modalAvailability = productModal.querySelector('.modal-availability')
+                const modalCart = productModal.querySelector('.add-to-cart');
+                modalCart.addEventListener('click', () => {
+                    addToCart(book); // Pass the book object to the addToCart function
+                });
+                function updateCartItemCount() {
+                    // Implement the function logic
+                }
+
                 if(book.availability)
                 {
                     modalAvailability.textContent="in stock"
@@ -1379,6 +1431,70 @@
             })
         }
     </script>
+    <script>
+        const cartItemCount = document.getElementById('cart-item-count');
+        const cartProducts = document.getElementById('cart-products');
+        const cartTotal = document.getElementById('cart-total');
+
+        // Function to update the cart UI
+        function updateCartUI() {
+            const cartData = JSON.parse(sessionStorage.getItem('cart')) || {};
+            let total = 0;
+            let itemCount = 0;
+
+            cartProducts.innerHTML = ''; // Clear existing cart items
+
+            for (const productId in cartData) {
+                const product = cartData[productId];
+                const itemTotal = product.quantity * parseFloat(product.price);
+                total += itemTotal;
+                itemCount += product.quantity;
+
+                // Create and append cart item HTML
+                const cartItem = document.createElement('div');
+                cartItem.classList.add('single-cart');
+                cartItem.innerHTML = `
+                <div class="cart-img">
+                    <a href="#"><img src="{{ asset('storage/${product.image}') }}" alt="book" /></a>
+                </div>
+                <div class="cart-info">
+                    <h5><a href="#">${product.name}</a></h5>
+                    <p>${product.quantity} x </p>
+                </div>
+                <div class="cart-icon">
+                    <a href="#" class="remove-item" data-product-id="${productId}"><i class="fa fa-remove"></i></a>
+                </div>
+            `;
+                cartProducts.appendChild(cartItem);
+            }
+
+            cartItemCount.textContent = itemCount;
+            cartTotal.textContent = `£${total.toFixed(2)}`;
+
+            const removeButtons = document.querySelectorAll('.remove-item');
+            console.log(removeButtons);
+            removeButtons.forEach(button => {
+                button.addEventListener('click', removeFromCart);
+            });
+        }
+        function removeFromCart(event) {
+
+            const productId = event.target.getAttribute('data-product-id');
+            console.log(productId); // Add this line
+
+            const cartData = JSON.parse(sessionStorage.getItem('cart')) || {};
+
+            if (cartData[productId]) {
+                delete cartData[productId];
+                sessionStorage.setItem('cart', JSON.stringify(cartData));
+                updateCartUI(); // Update the cart UI after removing item
+            }
+        }
+
+        // Call updateCartUI to initialize the cart UI
+        updateCartUI();
+    </script>
+
 </div>
 </body>
 
